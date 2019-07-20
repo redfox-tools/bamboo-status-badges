@@ -3,26 +3,25 @@
         <description>${project.description}</description>
         <version>${project.version}</version>
         <vendor name="${project.organization.name}" url="${project.organization.url}" />
-        <param name="plugin-icon">images/pluginIcon.png</param>
-        <param name="plugin-logo">images/pluginLogo.png</param>
+        <param name="plugin-icon">images/status-bages/pluginIcon.png</param>
+        <param name="plugin-logo">images/status-bages/pluginLogo.png</param>
     </plugin-info>
 
     <!-- add our i18n resource -->
     <resource type="i18n" name="i18n" location="bamboo-status-badges"/>
 
     <!-- add our web resources -->
-    <web-item key="badges-link" name="Badges menu item" section="chain.subMenu/chain" weight="999">
+    <web-item key="tools.redfox.badge-status.item.badges" name="Badges menu item" section="chain.subMenu/chain" weight="999">
         <label key="Badges">Badges</label>
-        <link linkId="badges-snippets-link">/badges/snippets.action?planKey=${planKey}</link>
+        <link linkId="tools.redfox.badge-status.link.badges">/badges/snippets.action?planKey=${planKey}</link>
         <description>Snippets link</description>
     </web-item>
 
-    <xwork key="badges-snippets" name="Display status badge snippets">
+    <xwork key="tools.redfox.badge-status.work.snippets" name="Display status badge snippets">
         <package extends="buildView" name="snippets" namespace="/badges">
             <action class="tools.redfox.bamboo.status.action.SnippetsAction" name="snippets">
-                <result name="input" type="freemarker">/templates/showSnippets.ftl</result>
-                <result name="success" type="freemarker">/templates/showSnippets.ftl</result>
-                <result name="error" type="freemarker">/error.ftl</result>
+                <result name="input" type="freemarker">/templates/tools/redfox/status-bages/showSnippets.ftl</result>
+                <result name="success" type="freemarker">/templates/tools/redfox/status-bages/showSnippets.ftl</result>
                 <result name="reload" type="redirect">/badges/snippets.action?planKey=${planKey}</result>
             </action>
         </package>
@@ -34,10 +33,10 @@
         <context>bamboo-status-badges</context>
     </web-resource>
 
-    <servlet class="tools.redfox.bamboo.status.servlet.BuildBadgeServlet" key="build-status" name="Build Status">
+    <servlet class="tools.redfox.bamboo.status.servlet.BuildBadgeServlet" key="tools.redfox.badge-status.build" name="Build Status">
         <url-pattern>/badge/build/*</url-pattern>
     </servlet>
-    <servlet class="tools.redfox.bamboo.status.servlet.DeployBadgeServlet" key="environment-status" name="Environment Status">
+    <servlet class="tools.redfox.bamboo.status.servlet.DeployBadgeServlet" key="tools.redfox.badge-status.environment" name="Environment Status">
         <url-pattern>/badge/environment/*</url-pattern>
     </servlet>
 </atlassian-plugin>
