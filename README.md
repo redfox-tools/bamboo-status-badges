@@ -8,3 +8,5 @@ Currently supporting:
 
 * build status badge
 * deployment status badge (including deployed version and environment name)
+
+![Badges](https://raw.githubusercontent.com/redfox-tools/bamboo-status-badges/master/src/main/resources/images/screen_1.png)
