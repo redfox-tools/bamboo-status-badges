@@ -46,7 +46,7 @@
         [#if action.getEnvironments()?has_content ]
         <h3>Deployments</h3>
         [#list action.getEnvironments() as env]
-            [#assign url = "${baseUrl}/plugins/servlet/badge/environment/${env.id}/${env.name}"]
+            [#assign url = "${baseUrl}/plugins/servlet/badge/environment/${env.id}"]
             <table class="aui">
                 <thead>
                 <tr>
@@ -97,7 +97,7 @@
         [#if action.getEnvironments()?has_content ]
         <h3>Deployments</h3>
         [#list action.getEnvironments() as env]
-            [#assign url = "${baseUrl}/plugins/servlet/badge/environment/${env.id}/${env.name}"]
+            [#assign url = "${baseUrl}/plugins/servlet/badge/environment/${env.id}"]
             <table class="aui">
                 <thead>
                 <tr>
@@ -148,7 +148,7 @@
         [#if action.getEnvironments()?has_content ]
         <h3>Deployments</h3>
         [#list action.getEnvironments() as env]
-            [#assign url = "${baseUrl}/plugins/servlet/badge/environment/${env.id}/${env.name}"]
+            [#assign url = "${baseUrl}/plugins/servlet/badge/environment/${env.id}"]
             <table class="aui">
                 <thead>
                 <tr>
@@ -199,7 +199,7 @@
         [#if action.getEnvironments()?has_content ]
         <h3>Deployments</h3>
         [#list action.getEnvironments() as env]
-            [#assign url = "${baseUrl}/plugins/servlet/badge/environment/${env.id}/${env.name}"]
+            [#assign url = "${baseUrl}/plugins/servlet/badge/environment/${env.id}"]
             <table class="aui">
                 <thead>
                 <tr>
