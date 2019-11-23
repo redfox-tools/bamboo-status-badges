@@ -37,9 +37,10 @@ public class DeployBadgeServlet extends AbstractBadgeServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            String envIdStr = request.getPathInfo();
-            long envId = Long.parseLong(envIdStr.substring(1));
-            response.sendRedirect(getBadgeUrl(envId));
+            String[] params = request.getPathInfo().substring(1).split("/");
+            long envId = Long.parseLong(params[0]);
+            String name = params[1];
+            response.sendRedirect(getBadgeUrl(envId, name));
         } catch (NumberFormatException e) {
             response.sendRedirect(BadgeBuilder.unknownDeployment());
         }
@@ -47,30 +48,25 @@ public class DeployBadgeServlet extends AbstractBadgeServlet {
         send(response);
     }
 
-    protected String getBadgeUrl(long envId) {
-        Environment environment = this.environmentService.getEnvironment(envId);
-        if (environment == null) {
-            return BadgeBuilder.unknownDeployment();
-        }
-
+    protected String getBadgeUrl(long envId, String name) {
         DeploymentResult deploymentResult = this.deploymentResultService.getLatestDeploymentResultForEnvironment(envId);
         if (deploymentResult == null) {
-            return BadgeBuilder.unknownDeployment(environment.getName());
+            return BadgeBuilder.unknownDeployment(name);
         }
 
         PlanResultKey planResultKey = this.deploymentVersionService.getRelatedPlanResultKeys(deploymentResult.getDeploymentVersion().getId()).iterator().next();
         if (planResultKey == null) {
-            return BadgeBuilder.unknownDeployment(environment.getName());
+            return BadgeBuilder.unknownDeployment(name);
         }
 
         ResultsSummary resultsSummary = this.resultsSummaryManager.getResultsSummary(planResultKey);
         if (resultsSummary == null) {
-            return BadgeBuilder.unknownDeployment(environment.getName());
+            return BadgeBuilder.unknownDeployment(name);
         }
 
         return BadgeBuilder.deployment(
                 getDeploymentStatus(deploymentResult),
-                environment.getName(),
+                name,
                 deploymentResult.getDeploymentVersionName()
         );
     }
